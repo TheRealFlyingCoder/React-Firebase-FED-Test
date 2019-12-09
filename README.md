@@ -4,7 +4,7 @@
 
 Offline FED test's are a very common thing. Hand out an unfinished solution to an agency or directly to a prospect, give them a time limit and some rules and wait for them to return their work.
 
-*But how do you really make sure they've followed the rules? *
+*But how do you really make sure they've followed the rules?*
 
 **That's why we are here.** 
 
