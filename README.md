@@ -8,7 +8,7 @@ Offline FED test's are a very common thing. Hand out an unfinished solution to a
 
 **That's why we are here.** 
 
-DD FED Test utilises Firebase for Storage and Authentication, so that your application can track users, and test submissions.
+This FED test utilises Firebase for Storage and Authentication, so that your application can track users, and test submissions.
 
 ## How It Works
 
