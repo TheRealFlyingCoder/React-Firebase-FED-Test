@@ -1,0 +1,48 @@
+{
+  "name": "react-firebase-fed-test",
+  "version": "1.0.0",
+  "description": "A simple React Firebase testing concept",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode development --open --hot",
+    "build": "webpack --mode production"
+  },
+  "repository": "https://github.com/TheRealFlyingCoder/React-Firebase-FED-Test",
+  "keywords": [
+    "React",
+    "SPA",
+    "Emotion.js",
+    "Firebase",
+    "JS",
+    "Testing"
+  ],
+  "author": "Thomas Rowe - TheFlyingCoder",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.7.7",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-emotion": "^10.0.27",
+    "eslint-plugin-emotion": "^10.0.27",
+    "file-loader": "^4.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "source-map-loader": "^0.2.4",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.1",
+    "webpack-manifest-plugin": "^2.2.0"
+  },
+  "dependencies": {
+    "@emotion/core": "^10.0.17",
+    "core-js": "^3.6.0",
+    "firebase": "^7.6.1",
+    "react": "^16.9.0",
+    "react-app-polyfill": "^1.0.5",
+    "react-dom": "^16.9.0",
+    "react-firebaseui": "^4.0.0",
+    "react-helmet": "^5.2.1",
+    "react-router-dom": "^5.0.1"
+  }
+}
