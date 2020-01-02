@@ -10,18 +10,29 @@ export default css`
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	z-index: ${Theme.layer.header};
 	.logo {
 		display: flex;
 		align-items: center;
 		margin-left: 15px;
+		text-decoration: none;
 		img {
 			max-width: 50px;
 		}
 
-		h2 {
+		h3 {			
 			margin-left: 15px;
 			color: ${Theme.colours.white}
+		}
+	}
+
+	.auth {
+		padding-right: 20px;
+
+		a {
+			color: ${Theme.colours.white};
+			text-decoration: none;
 		}
 	}
 `;

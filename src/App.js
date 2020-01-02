@@ -2,15 +2,24 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 /** @jsx jsx */
 import { jsx, Global } from '@emotion/core';
+import firebase from 'firebase';
+
 import routes from './routes';
 import AppStyles from './App.styles';
-import { StateProvider, stateKeys } from './StateProvider';
+import { StateProvider } from './StateProvider';
 import Layout from '~/global/Layout';
 import Meta from '~/configuration/meta';
+import { initConfig } from '~/configuration/firebaseConfig';
+import FirebaseAuthModule from '~/global/Utils/FirebaseAuthModule';
 
 export default function App() {
+	const initialState = {
+		User: null,
+		Org: null,
+	};
+
 	return (
-		<StateProvider>
+		<StateProvider initialState={initialState}>
 			<Router>
 				<Switch>
 					{routes.map(route => {
@@ -23,6 +32,7 @@ export default function App() {
 								render={props => {
 									return (
 										<>
+											<FirebaseAuthModule />
 											<Meta metaConfig={metaConfig} />
 											<Global styles={AppStyles} />
 											<Layout type={layoutType}>

@@ -5,18 +5,11 @@ import React, { createContext, useContext, useReducer } from 'react';
 const reducer = (state, action) => {
 	return {
 		...state,
-		[action.key]: action.data,
+		...action
 	};
 };
 
-const initialState = {
-	Data: {},
-};
-export const stateKeys = {
-	Data: 'data',
-};
-
-export const StateProvider = ({ children }) => (
+export const StateProvider = ({ children, initialState }) => (
 	<StateContext.Provider value={useReducer(reducer, initialState)}>
 		{children}
 	</StateContext.Provider>
@@ -34,10 +27,6 @@ export const StateContext = createContext();
 //   const [state, setState] = useStateValue();
 //
 //   setState({
-//     key: stateKeys.Data,
-//     data: {
-//       ...state,
-//       mockKey: 'mockValue'
-//     }
+//     mockKey: 'mockValue'
 //   })
 // }

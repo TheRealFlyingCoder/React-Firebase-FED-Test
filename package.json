@@ -4,8 +4,8 @@
   "description": "A simple React Firebase testing concept",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open --hot",
-    "build": "webpack --mode production"
+    "start": "webpack-dev-server --env development --open --hot",
+    "build": "webpack --env production"
   },
   "repository": "https://github.com/TheRealFlyingCoder/React-Firebase-FED-Test",
   "keywords": [

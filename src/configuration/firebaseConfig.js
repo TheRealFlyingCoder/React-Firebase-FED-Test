@@ -1,9 +1,12 @@
-import Paths from './paths';
+import Paths from '../pods/Authentication/paths';
 import firebase from 'firebase';
+import keys from '../../.firebase/keys';
 
 export const initConfig = {
-  apiKey: 'AIzaSyAWGFvvlOcOysAUbBy1K5gYbQr7hNN_6W4',
-  authDomain: 'reactfirebasefedtest.firebaseapp.com',
+  apiKey: keys.apiKey,
+  authDomain: keys.authDomain,
+  storageBucket: keys.storageBucket,
+  projectId: keys.projectId,
 };
 
 export const uiConfig = {
