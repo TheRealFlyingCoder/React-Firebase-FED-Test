@@ -14,12 +14,14 @@ import FirebaseAuthModule from '~/global/Utils/FirebaseAuthModule';
 
 export default function App() {
 	const initialState = {
+		initialised: false,
 		User: null,
 		Org: null,
 	};
 
 	return (
 		<StateProvider initialState={initialState}>
+			<FirebaseAuthModule />
 			<Router>
 				<Switch>
 					{routes.map(route => {
@@ -31,8 +33,7 @@ export default function App() {
 								path={path}
 								render={props => {
 									return (
-										<>
-											<FirebaseAuthModule />
+										<>											
 											<Meta metaConfig={metaConfig} />
 											<Global styles={AppStyles} />
 											<Layout type={layoutType}>

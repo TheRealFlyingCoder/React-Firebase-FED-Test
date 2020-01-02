@@ -6,15 +6,12 @@ import { css, jsx } from '@emotion/core';
 import { useStateValue } from '~/StateProvider';
 import { initConfig, uiConfig } from '~/configuration/firebaseConfig';
 
-import { retrieveOrganisation } from './FirebaseDatabaseModule';
-
-const Styles = css`
-	min-height: 100px;
-`;
+import { retrieveUserOrganisation } from './FirebaseDatabaseModule';
 
 export default () => {
 	const [globalState, setGlobalState] = useStateValue();
-	const [checked, setChecked] = useState(false);
+
+	if (globalState.initialised) return null;
 
 	//Initialise firebase authentication
 	if (firebase.apps.length === 0) {
@@ -22,34 +19,38 @@ export default () => {
 		firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 	}
 
-	const unSub = firebase.auth().onAuthStateChanged(user => {
-		if (!checked) {
-			setGlobalState({
-				User: user,
+	const authenticateUser = () => {
+		return new Promise(function(resolve, reject) {
+			firebase.auth().onAuthStateChanged(function(user) {
+				if (user) {
+					resolve(user);
+				}
 			});
-			setChecked(true);
-			if(user) {
-				debugger;
-				retrieveOrganisation(user, org => {
-					debugger;
-					setGlobalState(prevState =>{
-						return {
-							...prevState,
-							org: org
-						}
-					});
-				})
-			}			
-		} else {
-			unSub();
-		}
+		});
+	};
+
+	authenticateUser().then(user => {
+		setGlobalState({
+			User: user,
+			initialised: true,
+		});
+
+		retrieveUserOrganisation(user, org => {
+			setGlobalState(prevState => {
+				return {
+					...prevState,
+					Org: org,
+				};
+			});
+		});
 	});
+
 	return null;
 };
 
 export const SignOut = () => {
-    firebase.auth().signOut();
-}
+	firebase.auth().signOut();
+};
 
 export const AuthLogin = () => {
 	const [loading, setLoading] = useState(true);
@@ -57,6 +58,10 @@ export const AuthLogin = () => {
 	const uiShown = () => {
 		setLoading(false);
 	};
+
+	const Styles = css`
+		min-height: 100px;
+	`;
 
 	const config = {
 		...uiConfig,
