@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
 /** @jsx jsx */
@@ -13,36 +13,30 @@ export default () => {
 
 	if (globalState.initialised) return null;
 
-	//Initialise firebase authentication
-	if (firebase.apps.length === 0) {
-		firebase.initializeApp(initConfig);
-		firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-	}
+	useEffect(() => {
+		if (!globalState.initialised) {
+			//Initialise firebase authentication
+			if (firebase.apps.length === 0) {
+				firebase.initializeApp(initConfig);
+				firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+			}
 
-	const authenticateUser = () => {
-		return new Promise(function(resolve, reject) {
-			firebase.auth().onAuthStateChanged(function(user) {
+			const auth = firebase.auth().onAuthStateChanged(user => {
 				if (user) {
-					resolve(user);
+					authenticateUser(user);
 				}
 			});
-		});
-	};
 
-	authenticateUser().then(user => {
-		setGlobalState({
-			User: user,
-			initialised: true,
-		});
-
-		retrieveUserOrganisation(user, org => {
-			setGlobalState(prevState => {
-				return {
-					...prevState,
+			const authenticateUser = async user => {
+				auth(); //Close the listener
+				const org = await retrieveUserOrganisation(user);
+				setGlobalState({
+					User: user,
 					Org: org,
-				};
-			});
-		});
+					initialised: true,
+				});
+			};
+		}
 	});
 
 	return null;
